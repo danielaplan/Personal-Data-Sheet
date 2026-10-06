@@ -1,0 +1,6 @@
+.env
+/vendor/
+/composer.phar
+.phpunit.cache/
+*.log
+/.local/
