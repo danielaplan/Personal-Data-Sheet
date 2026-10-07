@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Personal Data Sheet (PDS)
 
 A student CRUD project for entering and managing Personal Data Sheets using **HTML, CSS, JavaScript, jQuery AJAX, PHP, and MySQL/MariaDB**.
@@ -177,4 +176,4 @@ These checks passed on this workstation. Browser interaction and visual testing 
 This is an **open-access local school activity**, with no login or per-user record ownership. Anyone who can access the app can read and change its records. Use sample data for classroom demonstrations. The print feature is a browser-form printout, not a certified reproduction of the official government PDS document.
 =======
 
->>>>>>> bf9739f7b23e8bec86e3d9d6ffe254a6e1832941
+
