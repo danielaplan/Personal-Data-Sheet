@@ -41,3 +41,13 @@ __pycache__/
 .DS_Store
 Thumbs.db
 Desktop.ini
+
+# Design and documentation files (not needed to run)
+DESIGN.md
+PRODUCT.md
+CRUD-SETUP.md
+docs/superpowers/plans/pds-search-list-surface-brief.md
+
+# Developer checks and tests (not needed to run)
+scripts/check-form.py
+tests/records-crud.test.cjs
