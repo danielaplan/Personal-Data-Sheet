@@ -1,6 +1,43 @@
+# Local credentials and environment overrides
 .env
+.env.*
+!.env.example
+!.env.*.example
+
+# Installed dependencies and package-manager caches
 /vendor/
+/node_modules/
 /composer.phar
-.phpunit.cache/
-*.log
+/.npm/
+
+# Vendor files - local libraries should use CDN or npm, not be committed
+jquery-3.7.1.min.js
+
+# Local tooling and editor settings
 /.local/
+/.impeccable/
+/.idea/
+/.vscode/
+
+# Generated test results and language caches
+.phpunit.cache/
+.phpunit.result.cache
+__pycache__/
+*.py[cod]
+/.pytest_cache/
+/coverage/
+/test-results/
+/playwright-report/
+
+# Runtime logs, temporary files, and seed output
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+/seed-output.txt
+
+# Operating-system metadata
+.DS_Store
+Thumbs.db
+Desktop.ini

@@ -1,71 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
-    <link rel="stylesheet" href="style.css">
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-</head>
-
-<body>
-    <main class="container my-5">
-        <div class="row">
-            <div class="col-12">
-                <h1 class="text-center mb-4">PERSONAL DATA SHEET</h1>
-                
-                <div class="alert alert-warning">   Add/Edit/Delete/Search
-use JQuery AJAX
-                    <strong>WARNING:</strong> Any misrepresentation made in the Personal Data Sheet and the Work Experience Sheet shall cause the filing of administrative/criminal case/s against the person concerned.
-                </div>
-
-                <div class="alert alert-info">
-                    <strong>READ THE ATTACHED GUIDE TO FILLING OUT THE PERSONAL DATA SHEET (PDS) BEFORE ACCOMPLISHING THE PDS FORM.</strong>
-                    <br>
-                    Tick appropriate boxes (☐) and use separate sheet if necessary. Indicate N/A if not applicable. DO NOT ABBREVIATE.
-                </div>
-
-                <form>
-                    <div class="section mb-4">
-                        <h5 class="bg-secondary text-white p-2">I. PERSONAL INFORMATION</h5>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Complete your Personal Data Sheet, from personal information to family and educational background.">
+<title>Personal Data Sheet · PDS</title><link rel="stylesheet" href="form.css"><link rel="stylesheet" href="records.css"><link rel="stylesheet" href="sidebar-tabs.css"><script src="jquery-3.7.1.min.js" defer></script><script src="index.js" defer></script>
+</head><body>
+<a class="skip-link" href="#personal">Skip to form</a>
+<header class="app-header"><a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">P</span><span>Personal Data Sheet<small>PERSONAL RECORDS</small></span></a><a class="header-note" href="#records">Search saved records</a><button class="button print-button" type="button" data-print>Print form <span aria-hidden="true">↗</span></button></header>
+<div class="workspace"><aside class="sidebar"><div class="view-tabs" role="tablist" aria-label="Personal records" aria-orientation="vertical"><button type="button" id="form-tab" role="tab" aria-controls="form-view" aria-selected="true" tabindex="0">Personal data form</button><button type="button" id="records-tab" role="tab" aria-controls="records-view" aria-selected="false" tabindex="-1">Saved records</button></div><div id="form-sidebar"><p class="eyebrow">IN THIS FORM</p><nav aria-label="Form sections"><a href="#personal" aria-current="location"><span>01</span>Personal information</a>
+<a href="#citizenship"><span>02</span>Citizenship</a>
+<a href="#residential"><span>03</span>Residential address</a>
+<a href="#permanent"><span>04</span>Permanent address</a>
+<a href="#contact"><span>05</span>Contact information</a>
+<a href="#family"><span>06</span>Family background</a>
+<a href="#education"><span>07</span>Educational background</a>
+<a href="#signature-section"><span>08</span>Signature & date</a></nav><div class="sidebar-note"><span class="eyebrow">A FEW REMINDERS</span><p>Use your full legal name.<br>Write details in full.<br>Indicate N/A where applicable.</p></div><div class="entry-progress"><div><span>Fields filled</span><strong id="field-count">0</strong></div><progress id="field-progress" value="0" max="100" aria-label="Fields filled"></progress><small>Optional fields may be left blank.</small></div></div></aside>
+<main><div id="records-view" role="tabpanel" aria-labelledby="records-tab" tabindex="0" hidden><div class="page-intro"><p class="eyebrow">PERSONAL RECORDS / DIRECTORY</p><h1>Saved records</h1><p>Access and manage your existing Personal Data Sheets.</p></div><section class="section records-panel" id="records" aria-labelledby="records-title">
+<div class="records-heading"><div><h2 id="records-title">Saved records</h2><p>Search existing submissions, open a record to edit, or delete it.</p></div><button type="button" class="button" id="new-record">Add new record</button></div>
+<form id="search-form" class="search-controls"><div><label class="form-label" for="record-search">Search by name, mobile, or email</label><input class="form-control" type="search" id="record-search" maxlength="100" placeholder="Search saved records…"></div><button class="button" type="submit">Search</button><button class="button" type="button" id="clear-search">Clear search</button></form>
+<p id="records-action-status" role="status" tabindex="-1"></p><p id="records-status" role="status">Loading records…</p><div class="table-responsive"><table class="records-table"><caption class="visually-hidden">Saved Personal Data Sheet records</caption><thead><tr><th scope="col">Name</th><th scope="col">Date of birth</th><th scope="col">Contact</th><th scope="col">Updated</th><th scope="col">Actions</th></tr></thead><tbody id="records-body"></tbody></table></div>
+<div class="pagination"><button type="button" class="button" id="previous-page" disabled>Previous</button><span id="page-label">Page 1</span><button type="button" class="button" id="next-page" disabled>Next</button></div>
+</section></div><div id="form-view" role="tabpanel" aria-labelledby="form-tab" tabindex="0"><div class="page-intro"><p class="eyebrow" id="record-mode">PERSONAL RECORD / NEW ENTRY</p><h1>Personal Data Sheet</h1><p>A clear record of your background.<br>Complete each section with accurate, up-to-date information.</p><div class="page-meta"><span>Personal information</span><span>Family background</span><span>Education</span></div></div>
+<details class="instructions"><summary>Before you begin <span>Instructions & declaration</span></summary><div><p>Read the guide to filling out the Personal Data Sheet (PDS) before accomplishing the form. Tick appropriate boxes and use a separate sheet if necessary. Indicate N/A if not applicable. Do not abbreviate.</p><p class="alert alert-warning"><strong>Declaration of accuracy.</strong> Any misrepresentation made in the Personal Data Sheet and the Work Experience Sheet shall cause the filing of administrative/criminal case/s against the person concerned.</p></div></details>
+<div class="editor-notice"><strong id="editor-title">Add a new record</strong><span>First name and surname are required. Other fields are optional.</span><p id="form-status" role="status" tabindex="-1"></p></div>
+<form id="pds-form">
+                    <section class="section mb-4" id="personal" aria-labelledby="personal-title"><header class="section-heading"><span class="section-number">01</span><div><h2 id="personal-title">Personal information</h2><p>Your name, birth details, and government identification.</p></div></header>
                         
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <label for="surname" class="form-label">1. SURNAME</label>
-                                <input type="text" class="form-control" id="surname" placeholder="">
+                                <label for="surname" class="form-label">1. surname</label>
+                                <input type="text" class="form-control" id="surname" placeholder="" name="surname" required maxlength="500">
                             </div>
                             <div class="col-md-3">
-                                <label for="firstname" class="form-label">2. FIRST NAME</label>
-                                <input type="text" class="form-control" id="firstname" placeholder="">
+                                <label for="firstname" class="form-label">2. first name</label>
+                                <input type="text" class="form-control" id="firstname" placeholder="" name="firstname" required maxlength="500">
                             </div>
                             <div class="col-md-3">
-                                <label for="nameext" class="form-label">NAME EXTENSION (JR., SR.)</label>
-                                <input type="text" class="form-control" id="nameext" placeholder="">
+                                <label for="nameext" class="form-label">Name extension (jr., sr.)</label>
+                                <input type="text" class="form-control" id="nameext" placeholder="" name="nameext" maxlength="500">
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <div class="col-md-12">
-                                <label for="middlename" class="form-label">3. MIDDLE NAME</label>
-                                <input type="text" class="form-control" id="middlename" placeholder="">
+                                <label for="middlename" class="form-label">3. middle name</label>
+                                <input type="text" class="form-control" id="middlename" placeholder="" name="middlename" maxlength="500">
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <div class="col-md-4">
-                                <label for="dateofbirth" class="form-label">4. DATE OF BIRTH (dd/mm/yyyy)</label>
-                                <input type="date" class="form-control" id="dateofbirth">
+                                <label for="dateofbirth" class="form-label">4. Date of birth</label>
+                                <input type="date" class="form-control" id="dateofbirth" name="dateofbirth">
                             </div>
                             <div class="col-md-4">
-                                <label for="placeofbirth" class="form-label">5. PLACE OF BIRTH</label>
-                                <input type="text" class="form-control" id="placeofbirth" placeholder="">
+                                <label for="placeofbirth" class="form-label">5. place of birth</label>
+                                <input type="text" class="form-control" id="placeofbirth" placeholder="" name="placeofbirth" maxlength="500">
                             </div>
                             <div class="col-md-4">
-                                <label for="sexatbirth" class="form-label">6. SEX AT BIRTH</label>
-                                <select class="form-select" id="sexatbirth">
+                                <label for="sexatbirth" class="form-label">6. sex at birth</label>
+                                <select class="form-select" id="sexatbirth" name="sexatbirth">
                                     <option value="">Select...</option>
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
@@ -76,15 +69,15 @@ use JQuery AJAX
                         <div class="row mb-3">
                             <div class="col-md-4">
                                 <label for="height" class="form-label">7. HEIGHT (m)</label>
-                                <input type="number" class="form-control" id="height" placeholder="" step="0.01">
+                                <input type="number" class="form-control" id="height" placeholder="" step="0.01" name="height" min="0">
                             </div>
                             <div class="col-md-4">
                                 <label for="weight" class="form-label">8. WEIGHT (kg)</label>
-                                <input type="number" class="form-control" id="weight" placeholder="" step="0.1">
+                                <input type="number" class="form-control" id="weight" placeholder="" step="0.1" name="weight" min="0">
                             </div>
                             <div class="col-md-4">
-                                <label for="bloodtype" class="form-label">9. BLOOD TYPE</label>
-                                <select class="form-select" id="bloodtype">
+                                <label for="bloodtype" class="form-label">9. blood type</label>
+                                <select class="form-select" id="bloodtype" name="bloodtype">
                                     <option value="">Select...</option>
                                     <option value="O+">O+</option>
                                     <option value="O-">O-</option>
@@ -100,37 +93,36 @@ use JQuery AJAX
 
                         <div class="row mb-3">
                             <div class="col-md-4">
-                                <label for="umidid" class="form-label">10. UMID ID NO</label>
-                                <input type="text" class="form-control" id="umidid" placeholder="">
+                                <label for="umidid" class="form-label">10. UMID ID no</label>
+                                <input type="text" class="form-control" id="umidid" placeholder="" name="umidid" maxlength="500">
                             </div>
                             <div class="col-md-4">
-                                <label for="pagibigid" class="form-label">11. PAG-IBIG ID NO</label>
-                                <input type="text" class="form-control" id="pagibigid" placeholder="">
+                                <label for="pagibigid" class="form-label">11. Pag-IBIG ID no</label>
+                                <input type="text" class="form-control" id="pagibigid" placeholder="" name="pagibigid" maxlength="500">
                             </div>
                             <div class="col-md-4">
-                                <label for="philhealthid" class="form-label">12. PHILHEALTH NO</label>
-                                <input type="text" class="form-control" id="philhealthid" placeholder="">
+                                <label for="philhealthid" class="form-label">12. philhealth no</label>
+                                <input type="text" class="form-control" id="philhealthid" placeholder="" name="philhealthid" maxlength="500">
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <div class="col-md-4">
                                 <label for="philsysid" class="form-label">13. PhilSys Card Number (PCN)</label>
-                                <input type="text" class="form-control" id="philsysid" placeholder="">
+                                <input type="text" class="form-control" id="philsysid" placeholder="" name="philsysid" maxlength="500">
                             </div>
                             <div class="col-md-4">
-                                <label for="tinno" class="form-label">14. TIN NO</label>
-                                <input type="text" class="form-control" id="tinno" placeholder="">
+                                <label for="tinno" class="form-label">14. TIN no</label>
+                                <input type="text" class="form-control" id="tinno" placeholder="" name="tinno" maxlength="500">
                             </div>
                             <div class="col-md-4">
-                                <label for="agencyemp" class="form-label">15. AGENCY EMPLOYEE NO</label>
-                                <input type="text" class="form-control" id="agencyemp" placeholder="">
+                                <label for="agencyemp" class="form-label">15. agency employee no</label>
+                                <input type="text" class="form-control" id="agencyemp" placeholder="" name="agencyemp" maxlength="500">
                             </div>
                         </div>
-                    </div>
+                    </section>
 
-                    <div class="section mb-4">
-                        <h5 class="bg-secondary text-white p-2">16. CITIZENSHIP</h5>
+                    <section class="section mb-4" id="citizenship" aria-labelledby="citizenship-title"><header class="section-heading"><span class="section-number">02</span><div><h2 id="citizenship-title">Citizenship</h2><p>Indicate your citizenship and provide details where applicable.</p></div></header>
                         
                         <div class="row mb-3">
                             <div class="col-md-6">
@@ -154,165 +146,161 @@ use JQuery AJAX
                         <div class="row mb-3">
                             <div class="col-md-12">
                                 <label for="citizenship_country" class="form-label">If holder of dual citizenship, please indicate the details</label>
-                                <input type="text" class="form-control" id="citizenship_country" placeholder="Country:">
+                                <input type="text" class="form-control" id="citizenship_country" placeholder="Country:" name="citizenship_country" maxlength="500">
                             </div>
                         </div>
-                    </div>
+                    </section>
 
-                    <div class="section mb-4">
-                        <h5 class="bg-secondary text-white p-2">17. RESIDENTIAL ADDRESS</h5>
+                    <section class="section mb-4" id="residential" aria-labelledby="residential-title"><header class="section-heading"><span class="section-number">03</span><div><h2 id="residential-title">Residential address</h2><p>Enter the address where you currently live.</p></div></header>
                         
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="res_house" class="form-label">House/Block/Lot No.</label>
-                                <input type="text" class="form-control" id="res_house" placeholder="">
+                                <input type="text" class="form-control" id="res_house" placeholder="" name="res_house" maxlength="500">
                             </div>
                             <div class="col-md-6">
                                 <label for="res_street" class="form-label">Street</label>
-                                <input type="text" class="form-control" id="res_street" placeholder="">
+                                <input type="text" class="form-control" id="res_street" placeholder="" name="res_street" maxlength="500">
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="res_subdiv" class="form-label">Subdivision/Village</label>
-                                <input type="text" class="form-control" id="res_subdiv" placeholder="">
+                                <input type="text" class="form-control" id="res_subdiv" placeholder="" name="res_subdiv" maxlength="500">
                             </div>
                             <div class="col-md-6">
                                 <label for="res_barangay" class="form-label">Barangay</label>
-                                <input type="text" class="form-control" id="res_barangay" placeholder="">
+                                <input type="text" class="form-control" id="res_barangay" placeholder="" name="res_barangay" maxlength="500">
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="res_city" class="form-label">City/Municipality</label>
-                                <input type="text" class="form-control" id="res_city" placeholder="">
+                                <input type="text" class="form-control" id="res_city" placeholder="" name="res_city" maxlength="500">
                             </div>
                             <div class="col-md-6">
                                 <label for="res_province" class="form-label">Province</label>
-                                <input type="text" class="form-control" id="res_province" placeholder="">
+                                <input type="text" class="form-control" id="res_province" placeholder="" name="res_province" maxlength="500">
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <div class="col-md-12">
-                                <label for="res_zip" class="form-label">ZIP CODE</label>
-                                <input type="text" class="form-control" id="res_zip" placeholder="">
+                                <label for="res_zip" class="form-label">ZIP code</label>
+                                <input type="text" class="form-control" id="res_zip" placeholder="" name="res_zip" maxlength="500">
                             </div>
                         </div>
-                    </div>
+                    </section>
 
-                    <div class="section mb-4">
-                        <h5 class="bg-secondary text-white p-2">18. PERMANENT ADDRESS</h5>
+                    <section class="section mb-4" id="permanent" aria-labelledby="permanent-title"><header class="section-heading"><span class="section-number">04</span><div><h2 id="permanent-title">Permanent address</h2><p>Enter your permanent home address.</p></div></header>
                         
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="perm_house" class="form-label">House/Block/Lot No.</label>
-                                <input type="text" class="form-control" id="perm_house" placeholder="">
+                                <input type="text" class="form-control" id="perm_house" placeholder="" name="perm_house" maxlength="500">
                             </div>
                             <div class="col-md-6">
                                 <label for="perm_street" class="form-label">Street</label>
-                                <input type="text" class="form-control" id="perm_street" placeholder="">
+                                <input type="text" class="form-control" id="perm_street" placeholder="" name="perm_street" maxlength="500">
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="perm_subdiv" class="form-label">Subdivision/Village</label>
-                                <input type="text" class="form-control" id="perm_subdiv" placeholder="">
+                                <input type="text" class="form-control" id="perm_subdiv" placeholder="" name="perm_subdiv" maxlength="500">
                             </div>
                             <div class="col-md-6">
                                 <label for="perm_barangay" class="form-label">Barangay</label>
-                                <input type="text" class="form-control" id="perm_barangay" placeholder="">
+                                <input type="text" class="form-control" id="perm_barangay" placeholder="" name="perm_barangay" maxlength="500">
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="perm_city" class="form-label">City/Municipality</label>
-                                <input type="text" class="form-control" id="perm_city" placeholder="">
+                                <input type="text" class="form-control" id="perm_city" placeholder="" name="perm_city" maxlength="500">
                             </div>
                             <div class="col-md-6">
                                 <label for="perm_province" class="form-label">Province</label>
-                                <input type="text" class="form-control" id="perm_province" placeholder="">
+                                <input type="text" class="form-control" id="perm_province" placeholder="" name="perm_province" maxlength="500">
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <div class="col-md-12">
-                                <label for="perm_zip" class="form-label">ZIP CODE</label>
-                                <input type="text" class="form-control" id="perm_zip" placeholder="">
+                                <label for="perm_zip" class="form-label">ZIP code</label>
+                                <input type="text" class="form-control" id="perm_zip" placeholder="" name="perm_zip" maxlength="500">
                             </div>
                         </div>
-                    </div>
+                    </section>
 
-                    <div class="section mb-4">
-                        <h5 class="bg-secondary text-white p-2">CONTACT INFORMATION</h5>
+                    <section class="section mb-4" id="contact" aria-labelledby="contact-title"><header class="section-heading"><span class="section-number">05</span><div><h2 id="contact-title">Contact information</h2><p>Provide your current contact details.</p></div></header>
                         
                         <div class="row mb-3">
                             <div class="col-md-4">
-                                <label for="telephone" class="form-label">19. TELEPHONE NO</label>
-                                <input type="tel" class="form-control" id="telephone" placeholder="">
+                                <label for="telephone" class="form-label">19. telephone no</label>
+                                <input type="tel" class="form-control" id="telephone" placeholder="" name="telephone" maxlength="500">
                             </div>
                             <div class="col-md-4">
-                                <label for="mobile" class="form-label">20. MOBILE NO</label>
-                                <input type="tel" class="form-control" id="mobile" placeholder="">
+                                <label for="mobile" class="form-label">20. mobile no</label>
+                                <input type="tel" class="form-control" id="mobile" placeholder="" name="mobile" maxlength="500">
                             </div>
                             <div class="col-md-4">
                                 <label for="email" class="form-label">21. E-MAIL ADDRESS (if any)</label>
-                                <input type="email" class="form-control" id="email" placeholder="">
+                                <input type="email" class="form-control" id="email" placeholder="" name="email" maxlength="500">
                             </div>
                         </div>
-                    </div>
+                    </section>
 
-                    <div class="section mb-4">
-                        <h5 class="bg-secondary text-white p-2">II. FAMILY BACKGROUND</h5>
+                    <section class="section mb-4" id="family" aria-labelledby="family-title"><header class="section-heading"><span class="section-number">06</span><div><h2 id="family-title">Family background</h2><p>Record your spouse and parent information.</p></div></header>
 
                         <div class="mb-4">
-                            <h6 class="bg-light p-2">22. SPOUSE'S SURNAME, FIRST NAME, MIDDLE NAME (If married, widow/er or separated/divorced)</h6>
+                            <h3>22. SPOUSE'S SURNAME, FIRST NAME, MIDDLE NAME (If married, widow/er or separated/divorced)</h3>
                             
                             <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <label for="spouse_surname" class="form-label">SURNAME</label>
-                                    <input type="text" class="form-control" id="spouse_surname" placeholder="">
+                                    <label for="spouse_surname" class="form-label">Surname</label>
+                                    <input type="text" class="form-control" id="spouse_surname" placeholder="" name="spouse_surname" maxlength="500">
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="spouse_firstname" class="form-label">FIRST NAME</label>
-                                    <input type="text" class="form-control" id="spouse_firstname" placeholder="">
+                                    <label for="spouse_firstname" class="form-label">First name</label>
+                                    <input type="text" class="form-control" id="spouse_firstname" placeholder="" name="spouse_firstname" maxlength="500">
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="spouse_nameext" class="form-label">NAME EXTENSION (JR., SR.)</label>
-                                    <input type="text" class="form-control" id="spouse_nameext" placeholder="">
+                                    <label for="spouse_nameext" class="form-label">Name extension (jr., sr.)</label>
+                                    <input type="text" class="form-control" id="spouse_nameext" placeholder="" name="spouse_nameext" maxlength="500">
                                 </div>
                             </div>
 
                             <div class="row mb-3">
                                 <div class="col-md-12">
-                                    <label for="spouse_middlename" class="form-label">MIDDLE NAME</label>
-                                    <input type="text" class="form-control" id="spouse_middlename" placeholder="">
+                                    <label for="spouse_middlename" class="form-label">Middle name</label>
+                                    <input type="text" class="form-control" id="spouse_middlename" placeholder="" name="spouse_middlename" maxlength="500">
                                 </div>
                             </div>
 
                             <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <label for="spouse_occupation" class="form-label">OCCUPATION</label>
-                                    <input type="text" class="form-control" id="spouse_occupation" placeholder="">
+                                    <label for="spouse_occupation" class="form-label">Occupation</label>
+                                    <input type="text" class="form-control" id="spouse_occupation" placeholder="" name="spouse_occupation" maxlength="500">
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="spouse_employer" class="form-label">EMPLOYER/BUSINESS NAME</label>
-                                    <input type="text" class="form-control" id="spouse_employer" placeholder="">
+                                    <label for="spouse_employer" class="form-label">Employer/business name</label>
+                                    <input type="text" class="form-control" id="spouse_employer" placeholder="" name="spouse_employer" maxlength="500">
                                 </div>
                             </div>
 
                             <div class="row mb-3">
                                 <div class="col-md-8">
-                                    <label for="spouse_address" class="form-label">BUSINESS ADDRESS</label>
-                                    <input type="text" class="form-control" id="spouse_address" placeholder="">
+                                    <label for="spouse_address" class="form-label">Business address</label>
+                                    <input type="text" class="form-control" id="spouse_address" placeholder="" name="spouse_address" maxlength="500">
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="spouse_telephone" class="form-label">TELEPHONE NO.</label>
-                                    <input type="tel" class="form-control" id="spouse_telephone" placeholder="">
+                                    <label for="spouse_telephone" class="form-label">Telephone no.</label>
+                                    <input type="tel" class="form-control" id="spouse_telephone" placeholder="" name="spouse_telephone" maxlength="500">
                                 </div>
                             </div>
 
@@ -322,10 +310,10 @@ use JQuery AJAX
                         </div>
 
                         <div class="mb-4">
-                            <h6 class="bg-light p-2">23. NAME OF CHILDREN (Write full name and list all)</h6>
+                            <h3>23. NAME OF CHILDREN (Write full name and list all)</h3>
                             
                             <div class="table-responsive mb-3">
-                                <table class="table table-bordered">
+                                <table class="table table-bordered"><caption>Education history · Scroll horizontally to view all fields.</caption>
                                     <thead>
                                         <tr>
                                             <th>Name of Children</th>
@@ -334,24 +322,24 @@ use JQuery AJAX
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td><input type="text" class="form-control" placeholder=""></td>
-                                            <td><input type="date" class="form-control"></td>
+                                            <td><input aria-label="Child 1: Full name" type="text" class="form-control" placeholder="" id="child_1_name" name="child_1_name" maxlength="500"></td>
+                                            <td><input aria-label="Child 1: Date of birth" type="date" class="form-control" id="child_1_birthdate" name="child_1_birthdate"></td>
                                         </tr>
                                         <tr>
-                                            <td><input type="text" class="form-control" placeholder=""></td>
-                                            <td><input type="date" class="form-control"></td>
+                                            <td><input aria-label="Child 2: Full name" type="text" class="form-control" placeholder="" id="child_2_name" name="child_2_name" maxlength="500"></td>
+                                            <td><input aria-label="Child 2: Date of birth" type="date" class="form-control" id="child_2_birthdate" name="child_2_birthdate"></td>
                                         </tr>
                                         <tr>
-                                            <td><input type="text" class="form-control" placeholder=""></td>
-                                            <td><input type="date" class="form-control"></td>
+                                            <td><input aria-label="Child 3: Full name" type="text" class="form-control" placeholder="" id="child_3_name" name="child_3_name" maxlength="500"></td>
+                                            <td><input aria-label="Child 3: Date of birth" type="date" class="form-control" id="child_3_birthdate" name="child_3_birthdate"></td>
                                         </tr>
                                         <tr>
-                                            <td><input type="text" class="form-control" placeholder=""></td>
-                                            <td><input type="date" class="form-control"></td>
+                                            <td><input aria-label="Child 4: Full name" type="text" class="form-control" placeholder="" id="child_4_name" name="child_4_name" maxlength="500"></td>
+                                            <td><input aria-label="Child 4: Date of birth" type="date" class="form-control" id="child_4_birthdate" name="child_4_birthdate"></td>
                                         </tr>
                                         <tr>
-                                            <td><input type="text" class="form-control" placeholder=""></td>
-                                            <td><input type="date" class="form-control"></td>
+                                            <td><input aria-label="Child 5: Full name" type="text" class="form-control" placeholder="" id="child_5_name" name="child_5_name" maxlength="500"></td>
+                                            <td><input aria-label="Child 5: Date of birth" type="date" class="form-control" id="child_5_birthdate" name="child_5_birthdate"></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -363,53 +351,53 @@ use JQuery AJAX
                         </div>
 
                         <div class="mb-4">
-                            <h6 class="bg-light p-2">24. FATHER'S SURNAME, FIRST NAME, MIDDLE NAME</h6>
+                            <h3>24. FATHER'S SURNAME, FIRST NAME, MIDDLE NAME</h3>
                             
                             <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <label for="father_surname" class="form-label">SURNAME</label>
-                                    <input type="text" class="form-control" id="father_surname" placeholder="">
+                                    <label for="father_surname" class="form-label">Surname</label>
+                                    <input type="text" class="form-control" id="father_surname" placeholder="" name="father_surname" maxlength="500">
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="father_firstname" class="form-label">FIRST NAME</label>
-                                    <input type="text" class="form-control" id="father_firstname" placeholder="">
+                                    <label for="father_firstname" class="form-label">First name</label>
+                                    <input type="text" class="form-control" id="father_firstname" placeholder="" name="father_firstname" maxlength="500">
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="father_nameext" class="form-label">NAME EXTENSION (JR., SR.)</label>
-                                    <input type="text" class="form-control" id="father_nameext" placeholder="">
+                                    <label for="father_nameext" class="form-label">Name extension (jr., sr.)</label>
+                                    <input type="text" class="form-control" id="father_nameext" placeholder="" name="father_nameext" maxlength="500">
                                 </div>
                             </div>
 
                             <div class="row mb-3">
                                 <div class="col-md-12">
-                                    <label for="father_middlename" class="form-label">MIDDLE NAME</label>
-                                    <input type="text" class="form-control" id="father_middlename" placeholder="">
+                                    <label for="father_middlename" class="form-label">Middle name</label>
+                                    <input type="text" class="form-control" id="father_middlename" placeholder="" name="father_middlename" maxlength="500">
                                 </div>
                             </div>
                         </div>
 
                         <div class="mb-4">
-                            <h6 class="bg-light p-2">25. MOTHER'S MAIDEN NAME, SURNAME, FIRST NAME, MIDDLE NAME</h6>
+                            <h3>25. MOTHER'S MAIDEN NAME, SURNAME, FIRST NAME, MIDDLE NAME</h3>
                             
                             <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <label for="mother_surname" class="form-label">SURNAME</label>
-                                    <input type="text" class="form-control" id="mother_surname" placeholder="">
+                                    <label for="mother_surname" class="form-label">Surname</label>
+                                    <input type="text" class="form-control" id="mother_surname" placeholder="" name="mother_surname" maxlength="500">
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="mother_firstname" class="form-label">FIRST NAME</label>
-                                    <input type="text" class="form-control" id="mother_firstname" placeholder="">
+                                    <label for="mother_firstname" class="form-label">First name</label>
+                                    <input type="text" class="form-control" id="mother_firstname" placeholder="" name="mother_firstname" maxlength="500">
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="mother_nameext" class="form-label">NAME EXTENSION (JR., SR.)</label>
-                                    <input type="text" class="form-control" id="mother_nameext" placeholder="">
+                                    <label for="mother_nameext" class="form-label">Name extension (jr., sr.)</label>
+                                    <input type="text" class="form-control" id="mother_nameext" placeholder="" name="mother_nameext" maxlength="500">
                                 </div>
                             </div>
 
                             <div class="row mb-3">
                                 <div class="col-md-12">
-                                    <label for="mother_middlename" class="form-label">MIDDLE NAME</label>
-                                    <input type="text" class="form-control" id="mother_middlename" placeholder="">
+                                    <label for="mother_middlename" class="form-label">Middle name</label>
+                                    <input type="text" class="form-control" id="mother_middlename" placeholder="" name="mother_middlename" maxlength="500">
                                 </div>
                             </div>
 
@@ -417,13 +405,12 @@ use JQuery AJAX
                                 <small>(Continue on sheet C7 if necessary)</small>
                             </div>
                         </div>
-                    </div>
+                    </section>
 
-                    <div class="section mb-4">
-                        <h5 class="bg-secondary text-white p-2">III. EDUCATIONAL BACKGROUND</h5>
+                    <section class="section mb-4" id="education" aria-labelledby="education-title"><header class="section-heading"><span class="section-number">07</span><div><h2 id="education-title">Educational background</h2><p>Write school names and qualifications in full.</p></div></header>
 
                         <div class="table-responsive mb-3">
-                            <table class="table table-bordered">
+                            <table class="table table-bordered"><caption>Education history · Scroll horizontally to view all fields.</caption>
                                 <thead class="table-light">
                                     <tr>
                                         <th>LEVEL</th>
@@ -438,57 +425,57 @@ use JQuery AJAX
                                 <tbody>
                                     <tr>
                                         <td class="fw-bold">ELEMENTARY</td>
-                                        <td><input type="text" class="form-control form-control-sm" placeholder=""></td>
-                                        <td><input type="text" class="form-control form-control-sm" placeholder=""></td>
-                                        <td><input type="text" class="form-control form-control-sm" placeholder="From" style="width: 70px;"></td>
-                                        <td><input type="text" class="form-control form-control-sm" placeholder="To" style="width: 70px;"></td>
-                                        <td><input type="text" class="form-control form-control-sm" placeholder=""></td>
-                                        <td><input type="text" class="form-control form-control-sm" placeholder=""></td>
-                                        <td><input type="text" class="form-control form-control-sm" placeholder=""></td>
+                                        <td><input aria-label="Elementary: School name" type="text" class="form-control form-control-sm" placeholder="" id="education_elementary_school" name="education_elementary_school" maxlength="500"></td>
+                                        <td><input aria-label="Elementary: Education, degree or course" type="text" class="form-control form-control-sm" placeholder="" id="education_elementary_course" name="education_elementary_course" maxlength="500"></td>
+                                        <td><input aria-label="Elementary: Attendance from" type="text" class="form-control form-control-sm" placeholder="From" style="width: 70px;" id="education_elementary_from" name="education_elementary_from" maxlength="500"></td>
+                                        <td><input aria-label="Elementary: Attendance to" type="text" class="form-control form-control-sm" placeholder="To" style="width: 70px;" id="education_elementary_to" name="education_elementary_to" maxlength="500"></td>
+                                        <td><input aria-label="Elementary: Highest level or units earned" type="text" class="form-control form-control-sm" placeholder="" id="education_elementary_units" name="education_elementary_units" maxlength="500"></td>
+                                        <td><input aria-label="Elementary: Year graduated" type="text" class="form-control form-control-sm" placeholder="" id="education_elementary_graduated" name="education_elementary_graduated" maxlength="500"></td>
+                                        <td><input aria-label="Elementary: Scholarship or academic honors" type="text" class="form-control form-control-sm" placeholder="" id="education_elementary_honors" name="education_elementary_honors" maxlength="500"></td>
                                     </tr>
 
                                     <tr>
                                         <td class="fw-bold">SECONDARY</td>
-                                        <td><input type="text" class="form-control form-control-sm" placeholder=""></td>
-                                        <td><input type="text" class="form-control form-control-sm" placeholder=""></td>
-                                        <td><input type="text" class="form-control form-control-sm" placeholder="From" style="width: 70px;"></td>
-                                        <td><input type="text" class="form-control form-control-sm" placeholder="To" style="width: 70px;"></td>
-                                        <td><input type="text" class="form-control form-control-sm" placeholder=""></td>
-                                        <td><input type="text" class="form-control form-control-sm" placeholder=""></td>
-                                        <td><input type="text" class="form-control form-control-sm" placeholder=""></td>
+                                        <td><input aria-label="Secondary: School name" type="text" class="form-control form-control-sm" placeholder="" id="education_secondary_school" name="education_secondary_school" maxlength="500"></td>
+                                        <td><input aria-label="Secondary: Education, degree or course" type="text" class="form-control form-control-sm" placeholder="" id="education_secondary_course" name="education_secondary_course" maxlength="500"></td>
+                                        <td><input aria-label="Secondary: Attendance from" type="text" class="form-control form-control-sm" placeholder="From" style="width: 70px;" id="education_secondary_from" name="education_secondary_from" maxlength="500"></td>
+                                        <td><input aria-label="Secondary: Attendance to" type="text" class="form-control form-control-sm" placeholder="To" style="width: 70px;" id="education_secondary_to" name="education_secondary_to" maxlength="500"></td>
+                                        <td><input aria-label="Secondary: Highest level or units earned" type="text" class="form-control form-control-sm" placeholder="" id="education_secondary_units" name="education_secondary_units" maxlength="500"></td>
+                                        <td><input aria-label="Secondary: Year graduated" type="text" class="form-control form-control-sm" placeholder="" id="education_secondary_graduated" name="education_secondary_graduated" maxlength="500"></td>
+                                        <td><input aria-label="Secondary: Scholarship or academic honors" type="text" class="form-control form-control-sm" placeholder="" id="education_secondary_honors" name="education_secondary_honors" maxlength="500"></td>
                                     </tr>
 
                                     <tr>
                                         <td class="fw-bold">VOCATIONAL /<br>TRADE COURSE</td>
-                                        <td><input type="text" class="form-control form-control-sm" placeholder=""></td>
-                                        <td><input type="text" class="form-control form-control-sm" placeholder=""></td>
-                                        <td><input type="text" class="form-control form-control-sm" placeholder="From" style="width: 70px;"></td>
-                                        <td><input type="text" class="form-control form-control-sm" placeholder="To" style="width: 70px;"></td>
-                                        <td><input type="text" class="form-control form-control-sm" placeholder=""></td>
-                                        <td><input type="text" class="form-control form-control-sm" placeholder=""></td>
-                                        <td><input type="text" class="form-control form-control-sm" placeholder=""></td>
+                                        <td><input aria-label="Vocational / Trade Course: School name" type="text" class="form-control form-control-sm" placeholder="" id="education_vocational_school" name="education_vocational_school" maxlength="500"></td>
+                                        <td><input aria-label="Vocational / Trade Course: Education, degree or course" type="text" class="form-control form-control-sm" placeholder="" id="education_vocational_course" name="education_vocational_course" maxlength="500"></td>
+                                        <td><input aria-label="Vocational / Trade Course: Attendance from" type="text" class="form-control form-control-sm" placeholder="From" style="width: 70px;" id="education_vocational_from" name="education_vocational_from" maxlength="500"></td>
+                                        <td><input aria-label="Vocational / Trade Course: Attendance to" type="text" class="form-control form-control-sm" placeholder="To" style="width: 70px;" id="education_vocational_to" name="education_vocational_to" maxlength="500"></td>
+                                        <td><input aria-label="Vocational / Trade Course: Highest level or units earned" type="text" class="form-control form-control-sm" placeholder="" id="education_vocational_units" name="education_vocational_units" maxlength="500"></td>
+                                        <td><input aria-label="Vocational / Trade Course: Year graduated" type="text" class="form-control form-control-sm" placeholder="" id="education_vocational_graduated" name="education_vocational_graduated" maxlength="500"></td>
+                                        <td><input aria-label="Vocational / Trade Course: Scholarship or academic honors" type="text" class="form-control form-control-sm" placeholder="" id="education_vocational_honors" name="education_vocational_honors" maxlength="500"></td>
                                     </tr>
 
                                     <tr>
                                         <td class="fw-bold">COLLEGE</td>
-                                        <td><input type="text" class="form-control form-control-sm" placeholder=""></td>
-                                        <td><input type="text" class="form-control form-control-sm" placeholder=""></td>
-                                        <td><input type="text" class="form-control form-control-sm" placeholder="From" style="width: 70px;"></td>
-                                        <td><input type="text" class="form-control form-control-sm" placeholder="To" style="width: 70px;"></td>
-                                        <td><input type="text" class="form-control form-control-sm" placeholder=""></td>
-                                        <td><input type="text" class="form-control form-control-sm" placeholder=""></td>
-                                        <td><input type="text" class="form-control form-control-sm" placeholder=""></td>
+                                        <td><input aria-label="College: School name" type="text" class="form-control form-control-sm" placeholder="" id="education_college_school" name="education_college_school" maxlength="500"></td>
+                                        <td><input aria-label="College: Education, degree or course" type="text" class="form-control form-control-sm" placeholder="" id="education_college_course" name="education_college_course" maxlength="500"></td>
+                                        <td><input aria-label="College: Attendance from" type="text" class="form-control form-control-sm" placeholder="From" style="width: 70px;" id="education_college_from" name="education_college_from" maxlength="500"></td>
+                                        <td><input aria-label="College: Attendance to" type="text" class="form-control form-control-sm" placeholder="To" style="width: 70px;" id="education_college_to" name="education_college_to" maxlength="500"></td>
+                                        <td><input aria-label="College: Highest level or units earned" type="text" class="form-control form-control-sm" placeholder="" id="education_college_units" name="education_college_units" maxlength="500"></td>
+                                        <td><input aria-label="College: Year graduated" type="text" class="form-control form-control-sm" placeholder="" id="education_college_graduated" name="education_college_graduated" maxlength="500"></td>
+                                        <td><input aria-label="College: Scholarship or academic honors" type="text" class="form-control form-control-sm" placeholder="" id="education_college_honors" name="education_college_honors" maxlength="500"></td>
                                     </tr>
 
                                     <tr>
                                         <td class="fw-bold">GRADUATE STUDIES</td>
-                                        <td><input type="text" class="form-control form-control-sm" placeholder=""></td>
-                                        <td><input type="text" class="form-control form-control-sm" placeholder=""></td>
-                                        <td><input type="text" class="form-control form-control-sm" placeholder="From" style="width: 70px;"></td>
-                                        <td><input type="text" class="form-control form-control-sm" placeholder="To" style="width: 70px;"></td>
-                                        <td><input type="text" class="form-control form-control-sm" placeholder=""></td>
-                                        <td><input type="text" class="form-control form-control-sm" placeholder=""></td>
-                                        <td><input type="text" class="form-control form-control-sm" placeholder=""></td>
+                                        <td><input aria-label="Graduate Studies: School name" type="text" class="form-control form-control-sm" placeholder="" id="education_graduate_school" name="education_graduate_school" maxlength="500"></td>
+                                        <td><input aria-label="Graduate Studies: Education, degree or course" type="text" class="form-control form-control-sm" placeholder="" id="education_graduate_course" name="education_graduate_course" maxlength="500"></td>
+                                        <td><input aria-label="Graduate Studies: Attendance from" type="text" class="form-control form-control-sm" placeholder="From" style="width: 70px;" id="education_graduate_from" name="education_graduate_from" maxlength="500"></td>
+                                        <td><input aria-label="Graduate Studies: Attendance to" type="text" class="form-control form-control-sm" placeholder="To" style="width: 70px;" id="education_graduate_to" name="education_graduate_to" maxlength="500"></td>
+                                        <td><input aria-label="Graduate Studies: Highest level or units earned" type="text" class="form-control form-control-sm" placeholder="" id="education_graduate_units" name="education_graduate_units" maxlength="500"></td>
+                                        <td><input aria-label="Graduate Studies: Year graduated" type="text" class="form-control form-control-sm" placeholder="" id="education_graduate_graduated" name="education_graduate_graduated" maxlength="500"></td>
+                                        <td><input aria-label="Graduate Studies: Scholarship or academic honors" type="text" class="form-control form-control-sm" placeholder="" id="education_graduate_honors" name="education_graduate_honors" maxlength="500"></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -497,38 +484,18 @@ use JQuery AJAX
                         <div class="alert alert-info">
                             <small>(Continue on sheet C8 if necessary)</small>
                         </div>
-                    </div>
+                    </section>
 
-                    <div class="section mb-4">
-                        <div class="row mb-3">
+                    <section class="section mb-4" id="signature-section" aria-labelledby="signature-section-title"><header class="section-heading"><span class="section-number">08</span><div><h2 id="signature-section-title">Signature & date</h2><p>Review your entries before preparing a printed copy.</p></div></header><div class="row mb-3">
                             <div class="col-md-8">
                                 <label for="signature" class="form-label"><strong>SIGNATURE</strong></label>
                                 <small class="d-block text-muted">(e-signature/digital certificate)</small>
-                                <input type="text" class="form-control" id="signature" placeholder="" style="min-height: 60px;">
+                                <input type="text" class="form-control" id="signature" placeholder="" style="min-height: 60px;" name="signature" maxlength="500">
                             </div>
                             <div class="col-md-4">
                                 <label for="signature_date" class="form-label"><strong>DATE</strong></label>
-                                <input type="date" class="form-control" id="signature_date">
+                                <input type="date" class="form-control" id="signature_date" name="signature_date">
                             </div>
                         </div>
-                    </div>
-
-                    <div class="row mt-5">
-                        <div class="col-12">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                            <button type="reset" class="btn btn-secondary ms-2">Clear</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </main>
-
-    <footer>
-
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP8C9C31aPE8R+A3oshvXDcJdgYyqWCZYf" crossorigin="anonymous"></script>
-</body>
-
-</html>
+                    </section><div class="form-actions"><p><strong>Ready to save?</strong><span>Save your record before leaving this page.</span></p><div><button type="reset" class="button">Clear form</button><button type="submit" class="button" id="save-record" disabled>Save record</button><button type="button" class="button" data-print>Review & print <span aria-hidden="true">↗</span></button></div></div></form>
+<footer class="page-footer"><span>Personal Data Sheet</span><a href="#personal">Back to the top ↑</a></footer></div></main></div></body></html>
